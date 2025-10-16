@@ -4,13 +4,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Representerar en produktkategori
+ * Klassen är oföränderlig och återanvänder samma instans för samma namn
+ */
 public final class Category {
-    private final String name;
+
+    private final String name; // Kategorins namn
     private static final Map<String, Category> CACHE = new HashMap<>();
 
+    // Privat konstruktor, används bara i fabriksmetoden
     private Category(String name){
         this.name = name;
     }
+
+    // Skapar eller återanvänder en Category
+    // Validerar, normaliserar och lägger till i cachen vid behov
     public static Category of(String name){
         if (name == null){
             throw new IllegalArgumentException("Category name can't be null");
@@ -39,7 +48,7 @@ public final class Category {
     public int hashCode() {
         return Objects.hashCode(name);
     }
-
+    // Används bara för snyggare utskrifter i loggar eller felsökning
     @Override
     public String toString() {
         return "Category{" +

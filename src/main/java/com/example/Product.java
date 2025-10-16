@@ -4,12 +4,17 @@ import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Abstrakt basklass för alla produkter i lagret
+ * Innehåller gemensamma fält och metoder som namn, pris, kategori & id
+ */
 public abstract class Product {
-    private final UUID id;
-    private final String name;
-    private final Category category;
-    private BigDecimal price;
+    private final UUID id; // Unikt ID för produkten
+    private final String name; // Produktens namn
+    private final Category category; // Produktens kategori
+    private BigDecimal price; // Aktuellt pris
 
+    // Protected konstruktor, används av underklasser
     protected Product(UUID id, String name, Category category, BigDecimal price) {
         Objects.requireNonNull(id, "id cannot be null");
         this.id = id;
@@ -20,6 +25,8 @@ public abstract class Product {
         Objects.requireNonNull(price, "price cannot be null");
         this.price = price;
     }
+
+    // Getters (id, name, category, price)
     public UUID uuid() {
         return id;
     }
@@ -32,9 +39,10 @@ public abstract class Product {
     public BigDecimal price() {
         return price;
     }
-
+    // Sätter nytt pris
     public void price(BigDecimal newPrice) {
         this.price = Objects.requireNonNull(newPrice, "price cannot be null");
     }
+    // Måste implementeras av underklasser
     public abstract String productDetails();
 }
