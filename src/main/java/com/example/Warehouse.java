@@ -30,6 +30,9 @@ public final class Warehouse {
         if (product == null){
             throw new IllegalArgumentException("Product cannot be null.");
         }
+        if (products.containsKey(product.uuid())) {
+            throw new IllegalArgumentException("Product with that id already exists, use updateProduct for updates.");
+        }
         products.put(product.uuid(), product);
     }
 
@@ -98,4 +101,8 @@ public final class Warehouse {
         return products.values().stream()
                 .collect(Collectors.groupingBy(Product::category));
     }
+    public static Warehouse getInstance(){
+        return getInstance("DefaultWarehouse");
+    }
+
 }
